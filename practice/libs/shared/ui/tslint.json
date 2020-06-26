@@ -1,0 +1,10 @@
+{
+  "extends": "../../../tslint.json",
+  "rules": {
+    "directive-selector": [true, "attribute", "pUi", "camelCase"],
+    "component-selector": [true, "element", "p-ui", "kebab-case"]
+  },
+  "linterOptions": {
+    "exclude": ["!**/*"]
+  }
+}
