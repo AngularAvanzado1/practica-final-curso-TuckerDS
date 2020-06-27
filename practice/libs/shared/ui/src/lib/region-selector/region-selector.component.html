@@ -1,0 +1,7 @@
+<ul>
+  <li *ngFor="let region of regions"
+    [ngClass]="{'selected': (region.id === selectedItem)}"
+    (click)="clickEventHandler(region)">
+    {{region.name}}
+  </li>
+</ul>

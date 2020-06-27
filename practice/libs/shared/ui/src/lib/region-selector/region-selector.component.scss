@@ -1,0 +1,18 @@
+ul {
+  list-style-type: none;
+  li {
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 0 20px 20px 0;
+
+    &:hover {
+      background-color: gray;
+      color: white;
+    }
+
+    &.selected {
+      background-color: cornflowerblue;
+      color: white;
+    }
+  }
+}

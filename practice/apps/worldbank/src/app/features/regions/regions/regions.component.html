@@ -1,0 +1,12 @@
+<div class="regions">
+  <div class="sidebar">
+    <h2>Regions</h2>
+    <nav *ngIf="regions$ | async as regions">
+      <p-ui-region-selector [regions]="regions" (regionSelected)="regionSelectedHandler($event)"></p-ui-region-selector>
+    </nav>
+
+  </div>
+  <router-outlet></router-outlet>
+</div>
+
+

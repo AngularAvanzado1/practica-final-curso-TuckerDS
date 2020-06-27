@@ -14,10 +14,8 @@ export class RegionEffects {
 
   loadRegions$ = createEffect(() => {
     return this.actions$.pipe(
-
       ofType(RegionActions.loadRegions),
       concatMap(() =>
-        /** An EMPTY observable only emits completion. Replace with your own observable API request */
         this.http.get<any>(`${environment.BASE_API}/region/?format=json`).pipe(
           map(res => {
             const data = res && res[1] ? res[1] : [];
@@ -32,10 +30,25 @@ export class RegionEffects {
   });
 
 
+  loadCountries$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(RegionActions.loadCountries),
+      concatMap(({code}) =>
+        this.http.get<any>(`${environment.BASE_API}/region/${code}/country?per_page=1000&format=json`).pipe(
+          map(res => {
+            const data = res && res[1] ? res[1] : [];
+            return RegionActions.loadCountriesSuccess({ data })
+          }),
+          catchError(error =>
+            of(RegionActions.loadCountriesFailure({ error }))
+          )
+        )
+      )
+    );
+  });
 
   constructor(
     private actions$: Actions,
     private http: HttpClient
   ) {}
-
 }
