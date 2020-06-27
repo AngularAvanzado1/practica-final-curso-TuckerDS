@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  BASE_API: 'http://api.worldbank.org/v2'
 };
 
 /*
