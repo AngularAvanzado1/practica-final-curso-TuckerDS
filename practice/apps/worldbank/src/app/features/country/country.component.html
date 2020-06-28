@@ -1,1 +1,4 @@
 <p>country works!</p>
+<div *ngIf="country$ | async as country">
+  <p-ui-country-info [country]="country"></p-ui-country-info>
+</div>

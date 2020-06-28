@@ -22,7 +22,7 @@ export class RegionFacadeService {
     return this.store.select(state => state[regionFeatureKey].regions);
   }
 
-  public getRegionsByCode$(code) {
+  public getRegionByCode$(code) {
     const stateValue = this.state.getValue().region;
     return of(stateValue.regions.find(e => e.code === code));
   }
@@ -34,5 +34,10 @@ export class RegionFacadeService {
   public getCountries$(code) {
       // public regions$ = this.store.select(selectRegionState, 'regions');
     return this.store.select(state => state[regionFeatureKey].countries);
+  }
+
+  public getCountryById$(id) {
+    const stateValue = this.state.getValue().region;
+    return of(stateValue.countries.find(e => e.id === id));
   }
 }

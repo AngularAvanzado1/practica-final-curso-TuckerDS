@@ -24,7 +24,7 @@ export class CountriesComponent implements OnInit {
   ) {
     route.url.subscribe( url => {
       this.code = url[0].path;
-      this.region$ = regionService.getRegionsByCode$(this.code)
+      this.region$ = regionService.getRegionByCode$(this.code)
       this.regionService.loadCountries(this.code)
       console.log(this.region$)
     });

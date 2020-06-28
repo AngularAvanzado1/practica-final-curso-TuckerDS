@@ -1,0 +1,19 @@
+<div class="country-info">
+  <div>
+    <span class="label country-name">Country:</span>
+    <span>{{country.name}}</span>
+  </div>
+  <div>
+    <span class="label capital">Capital:</span>
+    <span>{{country.capitalCity}}</span>
+   </div>
+  <div>
+    <span class="label income">Income Level:</span>
+    <span>{{country.incomeLevel.value}}</span>
+  </div>
+  <div>
+    <span class="label location">Location:</span>
+    <span>{{country.longitude}}, {{country.latitude}}</span>
+  </div>
+  <p-ui-map [latitude]="country.latitude" [longitude]="country.longitude"></p-ui-map>
+</div>

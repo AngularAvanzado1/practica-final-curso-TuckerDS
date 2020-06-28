@@ -4,15 +4,15 @@ import { Routes, RouterModule } from '@angular/router';
 import { CountryComponent } from './country.component';
 
 const routes: Routes = [
+
   {
-    path: '', component: CountryComponent,
-    children: [
-      {
-        path: ':code',
-        component: CountryComponent,
-      }
-    ]
-  }
+    path: ':code',
+    component: CountryComponent,
+  },
+  {
+    path: '',
+    redirectTo: '/region',
+  },
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],

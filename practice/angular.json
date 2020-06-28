@@ -25,7 +25,9 @@
               "apps/worldbank/src/favicon.ico",
               "apps/worldbank/src/assets"
             ],
-            "styles": ["apps/worldbank/src/styles.scss"],
+            "styles": [
+              "apps/worldbank/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -83,7 +85,10 @@
               "apps/worldbank/tsconfig.app.json",
               "apps/worldbank/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/worldbank/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/worldbank/**/*"
+            ]
           }
         },
         "test": {
@@ -118,8 +123,13 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/worldbank-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/worldbank-e2e/**/*"]
+            "tsConfig": [
+              "apps/worldbank-e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/worldbank-e2e/**/*"
+            ]
           }
         }
       }
@@ -137,7 +147,10 @@
               "libs/shared/domain/tsconfig.lib.json",
               "libs/shared/domain/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/shared/domain/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/domain/**/*"
+            ]
           }
         },
         "test": {
@@ -163,7 +176,10 @@
               "libs/shared/ui/tsconfig.lib.json",
               "libs/shared/ui/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/shared/ui/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/ui/**/*"
+            ]
           }
         },
         "test": {
@@ -179,6 +195,148 @@
       "schematics": {
         "@nrwl/angular:component": {
           "style": "scss"
+        }
+      }
+    },
+    "external-map": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/external-map",
+      "sourceRoot": "apps/external-map/src",
+      "prefix": "practice",
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:browser",
+          "options": {
+            "outputPath": "dist/apps/external-map",
+            "index": "apps/external-map/src/index.html",
+            "main": "apps/external-map/src/main.ts",
+            "polyfills": "apps/external-map/src/polyfills.ts",
+            "tsConfig": "apps/external-map/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/external-map/src/favicon.ico",
+              "apps/external-map/src/assets"
+            ],
+            "styles": [
+              "apps/external-map/src/styles.scss"
+            ],
+            "scripts": [
+              {
+                "bundleName": "polyfill-webcomp-es5",
+                "input": "node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js"
+              },
+              {
+                "bundleName": "polyfill-webcomp",
+                "input": "node_modules/@webcomponents/webcomponentsjs/bundles/webcomponents-sd-ce-pf.js"
+              }
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/external-map/src/environments/environment.ts",
+                  "with": "apps/external-map/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "none",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "options": {
+            "browserTarget": "external-map:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "external-map:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "external-map:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/external-map/tsconfig.app.json",
+              "apps/external-map/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/external-map/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "ngx-build-plus:karma",
+          "options": {
+            "jestConfig": "apps/external-map/jest.config.js",
+            "tsConfig": "apps/external-map/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "apps/external-map/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "external-map-e2e": {
+      "root": "apps/external-map-e2e",
+      "sourceRoot": "apps/external-map-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/external-map-e2e/cypress.json",
+            "tsConfig": "apps/external-map-e2e/tsconfig.e2e.json",
+            "devServerTarget": "external-map:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "external-map:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/external-map-e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/external-map-e2e/**/*"
+            ]
+          }
         }
       }
     }

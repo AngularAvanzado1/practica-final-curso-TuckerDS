@@ -31,6 +31,13 @@
     },
     "shared-ui": {
       "tags": []
+    },
+    "external-map": {
+      "tags": []
+    },
+    "external-map-e2e": {
+      "tags": [],
+      "implicitDependencies": ["external-map"]
     }
   }
 }
