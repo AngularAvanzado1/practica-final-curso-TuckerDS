@@ -4,6 +4,10 @@
     {{item.name}}
   </li>
 </ul> -->
+<div *ngIf="region$ | async as region">
+  <h3>{{region.name}}</h3>
+</div>
+
 <nav *ngIf="countries$ | async as regions">
   <p-ui-region-selector [regions]="regions" (regionSelected)="countrySelectedHandler($event)"></p-ui-region-selector>
 </nav>
