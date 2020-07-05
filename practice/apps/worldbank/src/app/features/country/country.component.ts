@@ -20,7 +20,6 @@ export class CountryComponent implements OnInit {
     route.url.subscribe(url => {
       this.code = url[0].path;
       this.country$ = regionService.getCountryById$(this.code)
-      console.log(this.country$)
     });
   }
 

@@ -23,7 +23,6 @@ export class CountriesComponent {
   ) {
     route.url.subscribe( url => {
       this.code = this.route.snapshot.params.code;
-      console.log(this.code, this.route.snapshot.params)
       this.region$ = regionService.getRegionByCode$(this.code)
       this.countries$ = this.regionService.getCountries$(this.code);
     });

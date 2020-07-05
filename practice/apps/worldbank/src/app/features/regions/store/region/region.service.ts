@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store, State } from '@ngrx/store';
 import { RegionState, regionFeatureKey } from './region.reducer';
 import * as RegionActions from './region.actions';
-import { of, EMPTY, Observable } from 'rxjs';
+import { of, Observable } from 'rxjs';
 import { Country } from '@practice/domain';
 
 
@@ -30,7 +30,6 @@ export class RegionFacadeService {
   public loadCountries(code) {
     const region = this.state.getValue().region.regions.find(r => r.code === code);
     if (!region || (region && region.countries.length ===0) ) {
-      console.log(region)
       this.store.dispatch(RegionActions.loadCountries({ code }));
     }
   }
