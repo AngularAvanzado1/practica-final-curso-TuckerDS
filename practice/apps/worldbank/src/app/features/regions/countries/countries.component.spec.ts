@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CountriesComponent } from './countries.component';
+import { RegionSelectorModule } from '@practice/ui';
+import { StoreModule } from '@ngrx/store';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('CountriesComponent', () => {
   let component: CountriesComponent;
@@ -8,7 +11,12 @@ describe('CountriesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CountriesComponent ]
+      declarations: [CountriesComponent ],
+      imports: [
+        RegionSelectorModule,
+        RouterTestingModule,
+        StoreModule.forRoot({})
+      ]
     })
     .compileComponents();
   }));

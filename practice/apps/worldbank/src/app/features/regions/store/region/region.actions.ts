@@ -31,3 +31,19 @@ export const loadCountriesFailure = createAction(
   '[Region] Load Countries Failure',
   props<{ error: any }>()
 );
+
+
+export const loadCountry = createAction(
+  '[Region] Load Country',
+  props<{ code: string }>()
+);
+
+export const loadCountrySuccess = createAction(
+  '[Region] Load Country Success',
+  props<{ data: Country }>()
+);
+
+export const loadCountryFailure = createAction(
+  '[Region] Load Country Failure',
+  props<{ error: any }>()
+);

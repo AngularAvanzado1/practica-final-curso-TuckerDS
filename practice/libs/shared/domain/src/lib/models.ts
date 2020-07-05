@@ -3,6 +3,7 @@ export interface Region {
   code: string;
   iso2Code: string;
   name: string;
+  countries: Country[];
 }
 
 export interface Country {

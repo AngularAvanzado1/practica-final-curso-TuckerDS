@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Store, State } from '@ngrx/store';
 import { RegionState, regionFeatureKey } from './region.reducer';
-import * as ExchangeRateActions from './region.actions';
-import { of } from 'rxjs';
+import * as RegionActions from './region.actions';
+import { of, EMPTY, Observable } from 'rxjs';
+import { Country } from '@practice/domain';
 
 
 @Injectable({ providedIn: 'root' })
@@ -12,9 +13,8 @@ export class RegionFacadeService {
     private state: State<RegionState>,
   ) { }
 
-
   public loadRegions() {
-    this.store.dispatch(ExchangeRateActions.loadRegions());
+    this.store.dispatch(RegionActions.loadRegions());
   }
 
   public getRegions$() {
@@ -28,16 +28,27 @@ export class RegionFacadeService {
   }
 
   public loadCountries(code) {
-    this.store.dispatch(ExchangeRateActions.loadCountries({ code }));
+    const region = this.state.getValue().region.regions.find(r => r.code === code);
+    if (!region || (region && region.countries.length ===0) ) {
+      console.log(region)
+      this.store.dispatch(RegionActions.loadCountries({ code }));
+    }
   }
 
-  public getCountries$(code) {
-      // public regions$ = this.store.select(selectRegionState, 'regions');
-    return this.store.select(state => state[regionFeatureKey].countries);
+  public getCountries$(code):Observable<any> {
+    this.loadCountries(code);
+    return this.store.select(state => {
+      const region = state[regionFeatureKey].regions.find(r => r.code === code)
+      return region ? [...region.countries] : []
+    })
   }
 
   public getCountryById$(id) {
-    const stateValue = this.state.getValue().region;
-    return of(stateValue.countries.find(e => e.id === id));
+    this.loadCountry(id);
+    return this.store.select(state => state[regionFeatureKey].country);
+  }
+
+  public loadCountry(code) {
+    this.store.dispatch(RegionActions.loadCountry({ code }));
   }
 }

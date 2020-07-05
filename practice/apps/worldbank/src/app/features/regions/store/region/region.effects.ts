@@ -47,6 +47,24 @@ export class RegionEffects {
     );
   });
 
+  loadCountry$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(RegionActions.loadCountry),
+      concatMap(({ code }) =>
+        this.http.get<any>(`${environment.BASE_API}/country/${code}?format=json`).pipe(
+          map(res => {
+            const data = res && res[1] ? res[1][0] : [];
+            return RegionActions.loadCountrySuccess({ data })
+          }),
+          catchError(error =>
+            of(RegionActions.loadCountryFailure({ error }))
+          )
+        )
+      )
+    );
+  });
+
+
   constructor(
     private actions$: Actions,
     private http: HttpClient

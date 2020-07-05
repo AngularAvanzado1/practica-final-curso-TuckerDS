@@ -2,7 +2,10 @@
   <div class="sidebar">
     <h2>Regions</h2>
     <nav *ngIf="regions$ | async as regions">
-      <p-ui-region-selector [regions]="regions" (regionSelected)="regionSelectedHandler($event)"></p-ui-region-selector>
+      <p-ui-region-selector
+      [selectedItem]="getCode(regions)"
+      [regions]="regions"
+      (regionSelected)="regionSelectedHandler($event)"></p-ui-region-selector>
     </nav>
 
   </div>

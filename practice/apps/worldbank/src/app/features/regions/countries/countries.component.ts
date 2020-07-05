@@ -1,9 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RegionFacadeService } from '../store/region/region.service';
-import { Region } from '@practice/domain';
+import { Region, Country } from '@practice/domain';
 import { Observable } from 'rxjs';
-
 
 
 @Component({
@@ -12,9 +11,9 @@ import { Observable } from 'rxjs';
   styleUrls: ['./countries.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CountriesComponent implements OnInit {
+export class CountriesComponent {
   public code;
-  public countries$ = this.regionService.getCountries$(this.code);
+  public countries$: Observable<Country[]>;
   public region$: Observable<Region>;
 
   constructor(
@@ -23,20 +22,14 @@ export class CountriesComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     route.url.subscribe( url => {
-      this.code = url[0].path;
+      this.code = this.route.snapshot.params.code;
+      console.log(this.code, this.route.snapshot.params)
       this.region$ = regionService.getRegionByCode$(this.code)
-      this.regionService.loadCountries(this.code)
-      console.log(this.region$)
+      this.countries$ = this.regionService.getCountries$(this.code);
     });
    }
 
   countrySelectedHandler(country) {
-    console.log('Country', country)
     this.router.navigate(['country', country.id]);
   }
-
-  ngOnInit(): void {
-    this.code = this.route.snapshot.params.code
-  }
-
 }

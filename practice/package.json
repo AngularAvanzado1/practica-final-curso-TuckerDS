@@ -11,7 +11,7 @@
     "test": "ng test",
     "start:worldbank": "ng serve worldbank --port=4200 -o",
     "build:worldbank": "ng build worldbank --prod",
-    "test:worldbank": "ng test worldbank",
+    "test:worldbank": "ng test --project=worldbank --watch --verbose",
     "lint": "nx workspace-lint && ng lint",
     "e2e": "ng e2e",
     "affected:apps": "nx affected:apps",

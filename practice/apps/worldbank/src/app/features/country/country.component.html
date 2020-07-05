@@ -1,4 +1,9 @@
-<p>country works!</p>
 <div *ngIf="country$ | async as country">
+  <div class="back"
+    (click)="goTo(country.region.id)">
+    <span>Go to </span>
+    <span>{{country.region.value}}</span>
+  </div>
+  <h3>Country Info</h3>
   <p-ui-country-info [country]="country"></p-ui-country-info>
 </div>

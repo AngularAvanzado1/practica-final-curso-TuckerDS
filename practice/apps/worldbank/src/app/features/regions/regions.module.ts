@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
 
 import { RegionsRoutingModule } from './regions-routing.module';
 import { RegionsComponent } from './regions/regions.component';
@@ -15,7 +14,7 @@ import { CountriesModule } from './countries/countries.module';
 @NgModule({
   declarations: [
     RegionsComponent,
-    ],
+  ],
   imports: [
     CommonModule,
     RegionsRoutingModule,
@@ -23,7 +22,7 @@ import { CountriesModule } from './countries/countries.module';
     HttpClientModule,
     RegionSelectorModule,
     StoreModule.forFeature(fromRegion.regionFeatureKey, fromRegion.reducer),
-    EffectsModule.forFeature([RegionEffects])
-  ]
+    EffectsModule.forFeature([RegionEffects]),
+  ],
 })
 export class RegionsModule { }
