@@ -1,6 +1,6 @@
 <div class="regions">
   <div class="sidebar">
-    <h2>Regions</h2>
+    <h2 i18n="@@regions">Regions</h2>
     <nav *ngIf="regions$ | async as regions">
       <p-ui-region-selector
       [selectedItem]="getCode(regions)"
